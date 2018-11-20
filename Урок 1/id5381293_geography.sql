@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.0-dev
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Хост: 192.168.30.23
--- Время создания: Ноя 20 2018 г., 08:52
--- Версия сервера: 8.0.3-rc-log
--- Версия PHP: 7.2.9-1+0~20180910100512.5+stretch~1.gbpdaac35
+-- Хост: localhost
+-- Время создания: Ноя 20 2018 г., 12:22
+-- Версия сервера: 10.1.31-MariaDB
+-- Версия PHP: 7.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `geography`
+-- База данных: `id5381293_geography`
 --
 
 -- --------------------------------------------------------
@@ -32,9 +32,21 @@ CREATE TABLE `city` (
   `id` int(11) NOT NULL,
   `name` varchar(25) NOT NULL,
   `region` int(11) NOT NULL,
-  `district` int(11) NOT NULL,
+  `district` int(11) DEFAULT NULL,
   `population` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Дамп данных таблицы `city`
+--
+
+INSERT INTO `city` (`id`, `name`, `region`, `district`, `population`) VALUES
+(3, 'Успенка', 4, 4, 3972),
+(4, 'Павлодар', 4, NULL, 334697),
+(5, 'Барнаул', 1, NULL, 632372),
+(6, 'Новосибирск', 2, NULL, 1612833),
+(7, 'Убинское', 2, 6, 5375),
+(8, 'Ермолаевка', 2, 6, 408);
 
 -- --------------------------------------------------------
 
@@ -48,6 +60,14 @@ CREATE TABLE `country` (
   `capital` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Дамп данных таблицы `country`
+--
+
+INSERT INTO `country` (`id`, `name`, `capital`) VALUES
+(1, 'Россия', 'Москва'),
+(3, 'Казахстан', 'Астана');
+
 -- --------------------------------------------------------
 
 --
@@ -60,6 +80,18 @@ CREATE TABLE `district` (
   `region` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Дамп данных таблицы `district`
+--
+
+INSERT INTO `district` (`id`, `name`, `region`) VALUES
+(1, 'Шетский район', 3),
+(2, 'Улытауский район', 3),
+(3, 'Павлодарский район', 4),
+(4, 'Успенский район', 4),
+(5, 'Чановский район', 2),
+(6, 'Убинский район', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -71,6 +103,16 @@ CREATE TABLE `region` (
   `name` varchar(25) NOT NULL,
   `country` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Дамп данных таблицы `region`
+--
+
+INSERT INTO `region` (`id`, `name`, `country`) VALUES
+(1, 'Алтайский край', 1),
+(2, 'Новосибирская область', 1),
+(3, 'Карагандинская область', 3),
+(4, 'Павлодарская область', 3);
 
 --
 -- Индексы сохранённых таблиц
@@ -116,25 +158,25 @@ ALTER TABLE `region`
 -- AUTO_INCREMENT для таблицы `city`
 --
 ALTER TABLE `city`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `country`
 --
 ALTER TABLE `country`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `district`
 --
 ALTER TABLE `district`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `region`
 --
 ALTER TABLE `region`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
