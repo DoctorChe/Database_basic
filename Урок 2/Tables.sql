@@ -1,5 +1,2 @@
--- CREATE SCHEMA IF NOT EXISTS `geography`;
-DEFAULT CHARSET utf8mb4;
-DEFAULT COLLATE utf8mb4_unicode_ci;
--- USE `geography`;
--- SHOW TABLES;
+ALTER TABLE `city` DROP FOREIGN KEY `city_ibfk_1`;
+ALTER TABLE `city` DROP FOREIGN KEY `city_ibfk_2`;
