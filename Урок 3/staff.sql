@@ -51,8 +51,13 @@ SELECT CONCAT(`firstname`, ' ', `lastname`) AS 'ФИО', MAX(`salary`) FROM `emp
 
 -- Удалить одного сотрудника, у которого максимальная зарплата.
 
+-- DELETE FROM `employees` WHERE `salary` = (SELECT MAX(`salary`) FROM `employees`);
+-- не работает
+
+-- DELETE FROM `employees` WHERE `id` IS NOT NULL ORDER BY `salary`  DESC LIMIT 1;
 DELETE FROM `employees`
-WHERE `salary` = (SELECT MAX(`salary`) FROM `employees`);
+WHERE `id` IS NOT NULL
+AND `salary` = (SELECT * FROM (SELECT MAX(`salary`) FROM `employees` LIMIT 1) AS `temp1`);
 
 -- Посчитать количество сотрудников во всех отделах.
 
