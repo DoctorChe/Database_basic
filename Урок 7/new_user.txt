@@ -1,0 +1,87 @@
+root@MySQL8:~# mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.13 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE USER IF NOT EXISTS 'newuser'@'localhost' IDENTIFIED WITH mysql_native_password BY '123123';
+Query OK, 0 rows affected (0,09 sec)
+
+mysql> GRANT SELECT, INSERT ON geography.* TO 'newuser'@'localhost';
+Query OK, 0 rows affected (0,05 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0,01 sec)
+
+mysql> quit
+Bye
+root@MySQL8:~# mysql -u newuser -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.13 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> USE geography;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++---------------------+
+| Tables_in_geography |
++---------------------+
+| _cities             |
+| _countries          |
+| _regions            |
++---------------------+
+3 rows in set (0,00 sec)
+
+mysql> SELECT * FROM _cities;
++----+------------+-----------+-----------+------------------------+
+| id | country_id | important | region_id | title                  |
++----+------------+-----------+-----------+------------------------+
+|  3 |          3 |         0 |         4 | Успенка                |
+|  4 |          3 |         0 |         4 | Павлодар               |
+|  5 |          1 |         0 |         1 | Барнаул                |
+|  6 |          1 |         0 |         2 | Новосибирск            |
+|  7 |          1 |         0 |         2 | Убинское               |
+|  8 |          1 |         0 |         2 | Ермолаевка             |
++----+------------+-----------+-----------+------------------------+
+6 rows in set (0,00 sec)
+
+mysql> INSERT INTO _cities (country_id, important, region_id, title) VALUES (1, 0, 1, 'Бийск');
+Query OK, 1 row affected (0,03 sec)
+
+mysql> SELECT * FROM _cities;
++----+------------+-----------+-----------+------------------------+
+| id | country_id | important | region_id | title                  |
++----+------------+-----------+-----------+------------------------+
+|  3 |          3 |         0 |         4 | Успенка                |
+|  4 |          3 |         0 |         4 | Павлодар               |
+|  5 |          1 |         0 |         1 | Барнаул                |
+|  6 |          1 |         0 |         2 | Новосибирск            |
+|  7 |          1 |         0 |         2 | Убинское               |
+|  8 |          1 |         0 |         2 | Ермолаевка             |
+|  9 |          1 |         0 |         1 | Бийск                  |
++----+------------+-----------+-----------+------------------------+
+7 rows in set (0,00 sec)
+
+mysql> DELETE FROM _cities WHERE id=5;
+ERROR 1142 (42000): DELETE command denied to user 'newuser'@'localhost' for table '_cities'
+mysql>
