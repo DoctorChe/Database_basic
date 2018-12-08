@@ -1,0 +1,88 @@
+> use geography
+switched to db geography
+> db.geography.insert({"type":"country", "name":"Россия"})
+WriteResult({ "nInserted" : 1 })
+> db.geography.insert({"type":"country", "name":"Казахстан"})
+WriteResult({ "nInserted" : 1 })
+> db.geography.insert({"name":"Астана", "country":"Казахстан", "capital":1})
+WriteResult({ "nInserted" : 1 })
+> db.geography.insert({"name":"Усть-Каменогорск", "country":"Казахстан", "region":"ВКО"})
+WriteResult({ "nInserted" : 1 })
+> db.geography.insert({"name":"Алма-Ата", "country":"Казахстан"})
+WriteResult({ "nInserted" : 1 })
+> db.geography.insert({"name":"Москва", "country":"Россия", "capital":1})
+WriteResult({ "nInserted" : 1 })
+> db.geography.insert({"name":"Новосибирск", "country":"Россия", "region":"Новосибирская область"})
+WriteResult({ "nInserted" : 1 })
+> db.geography.insert({"name":"Убинское", "country":"Россия", "region":"Новосибирская область"})
+WriteResult({ "nInserted" : 1 })
+> db.geography.insert({"name":"Барнаул", "country":"Россия", "region":"Алтайский край"})
+WriteResult({ "nInserted" : 1 })
+> db.geography.find()
+{ "_id" : ObjectId("5c0bd9ca48c811e126c5f88d"), "type" : "country", "name" : "Россия" }
+{ "_id" : ObjectId("5c0bd9da48c811e126c5f88e"), "type" : "country", "name" : "Казахстан" }
+{ "_id" : ObjectId("5c0bdab348c811e126c5f88f"), "name" : "Астана", "country" : "Казахстан", "capital" : 1 }
+{ "_id" : ObjectId("5c0bdae248c811e126c5f890"), "name" : "Усть-Каменогорск", "country" : "Казахстан", "region" : "ВКО" }
+{ "_id" : ObjectId("5c0bdb1548c811e126c5f891"), "name" : "Алма-Ата", "country" : "Казахстан" }
+{ "_id" : ObjectId("5c0bdb3748c811e126c5f892"), "name" : "Москва", "country" : "Россия", "capital" : 1 }
+{ "_id" : ObjectId("5c0bdbb148c811e126c5f893"), "name" : "Новосибирск", "country" : "Россия", "region" : "Новосибирская область" }
+{ "_id" : ObjectId("5c0bdbec48c811e126c5f894"), "name" : "Убинское", "country" : "Россия", "region" : "Новосибирская область" }
+{ "_id" : ObjectId("5c0bdc0d48c811e126c5f895"), "name" : "Барнаул", "country" : "Россия", "region" : "Алтайский край" }
+> db.geography.remove({name : "Казахстан"})
+WriteResult({ "nRemoved" : 1 })
+> db.geography.remove({name : "Россия"})
+WriteResult({ "nRemoved" : 1 })
+> db.geography.find()
+{ "_id" : ObjectId("5c0bdab348c811e126c5f88f"), "name" : "Астана", "country" : "Казахстан", "capital" : 1 }
+{ "_id" : ObjectId("5c0bdae248c811e126c5f890"), "name" : "Усть-Каменогорск", "country" : "Казахстан", "region" : "ВКО" }
+{ "_id" : ObjectId("5c0bdb1548c811e126c5f891"), "name" : "Алма-Ата", "country" : "Казахстан" }
+{ "_id" : ObjectId("5c0bdb3748c811e126c5f892"), "name" : "Москва", "country" : "Россия", "capital" : 1 }
+{ "_id" : ObjectId("5c0bdbb148c811e126c5f893"), "name" : "Новосибирск", "country" : "Россия", "region" : "Новосибирская область" }
+{ "_id" : ObjectId("5c0bdbec48c811e126c5f894"), "name" : "Убинское", "country" : "Россия", "region" : "Новосибирская область" }
+{ "_id" : ObjectId("5c0bdc0d48c811e126c5f895"), "name" : "Барнаул", "country" : "Россия", "region" : "Алтайский край" }
+> db.geography.find({"name":"Москва"})
+{ "_id" : ObjectId("5c0bdb3748c811e126c5f892"), "name" : "Москва", "country" : "Россия", "capital" : 1 }
+> db.geography.find({"country":"Казахстан"})
+{ "_id" : ObjectId("5c0bdab348c811e126c5f88f"), "name" : "Астана", "country" : "Казахстан", "capital" : 1 }
+{ "_id" : ObjectId("5c0bdae248c811e126c5f890"), "name" : "Усть-Каменогорск", "country" : "Казахстан", "region" : "ВКО" }
+{ "_id" : ObjectId("5c0bdb1548c811e126c5f891"), "name" : "Алма-Ата", "country" : "Казахстан" }
+> db.geography.find({"_id" : ObjectId("5c0bdbb148c811e126c5f893")})
+{ "_id" : ObjectId("5c0bdbb148c811e126c5f893"), "name" : "Новосибирск", "country" : "Россия", "region" : "Новосибирская область" }
+> db.geography.find({"capital":{$exists: true}})
+{ "_id" : ObjectId("5c0bdab348c811e126c5f88f"), "name" : "Астана", "country" : "Казахстан", "capital" : 1 }
+{ "_id" : ObjectId("5c0bdb3748c811e126c5f892"), "name" : "Москва", "country" : "Россия", "capital" : 1 }
+> db.geography.find({"name":{$regex: "о"}})
+{ "_id" : ObjectId("5c0bdae248c811e126c5f890"), "name" : "Усть-Каменогорск", "country" : "Казахстан", "region" : "ВКО" }
+{ "_id" : ObjectId("5c0bdb3748c811e126c5f892"), "name" : "Москва", "country" : "Россия", "capital" : 1 }
+{ "_id" : ObjectId("5c0bdbb148c811e126c5f893"), "name" : "Новосибирск", "country" : "Россия", "region" : "Новосибирская область" }
+{ "_id" : ObjectId("5c0bdbec48c811e126c5f894"), "name" : "Убинское", "country" : "Россия", "region" : "Новосибирская область" }
+> db.geography.find({"name":{$regex: "^У"}})
+{ "_id" : ObjectId("5c0bdae248c811e126c5f890"), "name" : "Усть-Каменогорск", "country" : "Казахстан", "region" : "ВКО" }
+{ "_id" : ObjectId("5c0bdbec48c811e126c5f894"), "name" : "Убинское", "country" : "Россия", "region" : "Новосибирская область" }
+> db.geography.update({"name":"Убинское"}, {$set:{"region":"Алтайский край"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.geography.find({"name":"Убинское"})
+{ "_id" : ObjectId("5c0bdbec48c811e126c5f894"), "name" : "Убинское", "country" : "Россия", "region" : "Алтайский край" }
+> db.geography.update({"name":"Москва"}, {$set:{"capital":0}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.geography.update({"name":"Барнаул"}, {$set:{"capital":1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.geography.find({"capital":{$exists: true}})
+{ "_id" : ObjectId("5c0bdab348c811e126c5f88f"), "name" : "Астана", "country" : "Казахстан", "capital" : 1 }
+{ "_id" : ObjectId("5c0bdb3748c811e126c5f892"), "name" : "Москва", "country" : "Россия", "capital" : 0 }
+{ "_id" : ObjectId("5c0bdc0d48c811e126c5f895"), "name" : "Барнаул", "country" : "Россия", "region" : "Алтайский край", "capital" : 1 }
+> db.geography.find({"capital":true})
+> db.geography.find({"capital":1})
+{ "_id" : ObjectId("5c0bdab348c811e126c5f88f"), "name" : "Астана", "country" : "Казахстан", "capital" : 1 }
+{ "_id" : ObjectId("5c0bdc0d48c811e126c5f895"), "name" : "Барнаул", "country" : "Россия", "region" : "Алтайский край", "capital" : 1 }
+> db.geography.update({"name":{$exists:true}}, {$rename:{"name":"title"}}, false, true)
+WriteResult({ "nMatched" : 7, "nUpserted" : 0, "nModified" : 7 })
+> db.geography.find()
+{ "_id" : ObjectId("5c0bdab348c811e126c5f88f"), "country" : "Казахстан", "capital" : 1, "title" : "Астана" }
+{ "_id" : ObjectId("5c0bdae248c811e126c5f890"), "country" : "Казахстан", "region" : "ВКО", "title" : "Усть-Каменогорск" }
+{ "_id" : ObjectId("5c0bdb1548c811e126c5f891"), "country" : "Казахстан", "title" : "Алма-Ата" }
+{ "_id" : ObjectId("5c0bdb3748c811e126c5f892"), "country" : "Россия", "capital" : 0, "title" : "Москва" }
+{ "_id" : ObjectId("5c0bdbb148c811e126c5f893"), "country" : "Россия", "region" : "Новосибирская область", "title" : "Новосибирск" }
+{ "_id" : ObjectId("5c0bdbec48c811e126c5f894"), "country" : "Россия", "region" : "Алтайский край", "title" : "Убинское" }
+{ "_id" : ObjectId("5c0bdc0d48c811e126c5f895"), "country" : "Россия", "region" : "Алтайский край", "capital" : 1, "title" : "Барнаул" }
+>
